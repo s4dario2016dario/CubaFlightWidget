@@ -40,11 +40,12 @@ jobs:
               android:widgetCategory="home_screen" />
           EOF
 
-      - name: Fix JVM targets
+            - name: Fix JVM targets
         run: |
+          sed -i 's/VERSION_1_8/VERSION_17/g' CubaFlightWidget/app/build.gradle.kts
           sed -i 's/JavaVersion.VERSION_1_8/JavaVersion.VERSION_17/g' CubaFlightWidget/app/build.gradle.kts
           sed -i 's/jvmTarget = "1.8"/jvmTarget = "17"/g' CubaFlightWidget/app/build.gradle.kts
-
+          sed -i 's/JavaVersion.VERSION_1_8/JavaVersion.VERSION_17/g' CubaFlightWidget/app/build.gradle.kts
       - name: Build APK
         run: gradle -p CubaFlightWidget assembleDebug
 
