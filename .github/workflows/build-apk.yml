@@ -29,7 +29,16 @@ jobs:
         run: unzip -o CubaFlightWidget-progetto.zip
 
       - name: Fix widget description
-        run: sed -i '/android:description=/d' CubaFlightWidget/app/src/main/res/xml/cuba_flight_widget_info.xml
+        run: |
+          cat > CubaFlightWidget/app/src/main/res/xml/cuba_flight_widget_info.xml <<'EOF'
+          <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+              android:minWidth="250dp"
+              android:minHeight="150dp"
+              android:updatePeriodMillis="0"
+              android:initialLayout="@layout/cuba_flight_widget"
+              android:resizeMode="horizontal|vertical"
+              android:widgetCategory="home_screen" />
+          EOF
       - name: Build APK
         run: gradle -p CubaFlightWidget assembleDebug
 
