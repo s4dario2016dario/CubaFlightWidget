@@ -28,6 +28,8 @@ jobs:
       - name: Extract project
         run: unzip -o CubaFlightWidget-progetto.zip
 
+      - name: Fix widget description
+        run: sed -i '/android:description=/d' CubaFlightWidget/app/src/main/res/xml/cuba_flight_widget_info.xml
       - name: Build APK
         run: gradle -p CubaFlightWidget assembleDebug
 
